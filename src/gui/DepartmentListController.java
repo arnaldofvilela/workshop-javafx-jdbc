@@ -25,7 +25,7 @@ public class DepartmentListController implements Initializable{
 	@FXML
 	private TableView<Department> tableViewDepartment;
 	
-	@FXML
+	@FXML 
 	private TableColumn<Department, Integer> tableColumnId;
 	
 	@FXML
@@ -41,6 +41,7 @@ public class DepartmentListController implements Initializable{
 		System.out.println("onBtNewAction");
 	}
 	
+	//injecao de dependência manual
 	public void setDepartmentService(DepartmentService service) {
 		this.service = service;
 	}
@@ -54,21 +55,27 @@ public class DepartmentListController implements Initializable{
 	private void initializeNodes() {
 		tableColumnId.setCellValueFactory(new PropertyValueFactory<>("id"));
 		tableColumnName.setCellValueFactory(new PropertyValueFactory<>("name"));
-		
+		 
+		//faz o tableView acompanhar o tamanho da janela
 		Stage stage = (Stage) Main.getMainScene().getWindow();
 		tableViewDepartment.prefHeightProperty().bind(stage.heightProperty());
 		
 	}
 
 	public void updateTableView() {
+		
+		//verifica se o service está instanciado
 		if(service == null) {
 			throw new IllegalStateException("Service was null");
 		}
+		//recupera os departamentos do serviço (os que estão 'mockados' na outra classe
 		List<Department> list = service.findAll();
+		//carrega a lista para dentro do obsList
 		obsList = FXCollections.observableArrayList(list);
+		//carrega os itens para dentro da tableView e mostrar na tela
 		tableViewDepartment.setItems(obsList);
 	}
-}
+} 
 
 
 

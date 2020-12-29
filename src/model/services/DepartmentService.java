@@ -7,6 +7,7 @@ import model.entities.Department;
 
 public class DepartmentService {
 
+	//método que retorna lista de departamentos com dados 'mocados'
 	public List<Department> findAll(){
 		List<Department> list = new ArrayList<>();
 		list.add(new Department(1, "Books"));
